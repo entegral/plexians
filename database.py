@@ -1,7 +1,7 @@
 
 from sqlalchemy import create_engine, desc
 from sqlalchemy.orm import scoped_session, sessionmaker
-from models import Base, Zone, Person, House, Pet
+from models import Base, Person
 import datetime
 
 engine = create_engine('sqlite:///homeware.db', convert_unicode=True)
