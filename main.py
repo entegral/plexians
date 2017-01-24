@@ -96,4 +96,4 @@ def delete_chore():
     return render_template('chore_whore.html')
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port = 6289)
