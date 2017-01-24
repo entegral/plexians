@@ -6,9 +6,9 @@
 <div class="col-md-6" style="text-align:center">
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h3 class="panel-title-lg">Welcome to the Resident Configuration Page!</h3>
+      <h3 class="panel-title-lg">Welcome to the Person Configuration Page!</h3>
     </div><br>
-    <form class="panel-body" method="POST" action="{{  url_for('submit_resident_data')  }}">
+    <form class="panel-body" method="POST" action="{{  url_for('submit_person_data')  }}">
       <div class="input-group">
         <span class="input-group-addon">Name</span>
         <input type="text" class="form-control" name="name">
@@ -41,7 +41,7 @@
     <div class="panel-heading">
       <h3 class="panel-title">The following are the roomies already in the database:</h3>
     </div>
-    {% for each in residents %}
+    {% for each in persons %}
     <ul class="list-group">
       <li class="list-group-item">{{ each.name }}</li>
     </ul>
@@ -50,11 +50,11 @@
 
   <div class="panel panel-danger" style="text-align: center">
     <div class="panel-heading">
-      <h3 class="panel-title">Remove a Resident</h3>
+      <h3 class="panel-title">Remove a Person</h3>
     </div>
-    <form action= "{{url_for('remove_resident')}}" method="post">
+    <form action= "{{url_for('remove_person')}}" method="post">
       <p class="panel-body">To remove a person from the house, <br> type their name in the text box and click 'submit':</p>
-      <input type="text" name="removeResident"></input>
+      <input type="text" name="removePerson"></input>
       <button type="submit" class="btn btn-default">Submit</button>
     </form>
   </div>
