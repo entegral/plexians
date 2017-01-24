@@ -14,9 +14,9 @@ class Person(Base):
     """This is an object that will store information relating to the people
     living in the household. It stores personal information that
     enables this app to interact with the people in the household.
-    It also holds information relating to the "role" the resident has. """
+    It also holds information relating to the "role" the Person has. """
 
-    __tablename__ = 'residents'
+    __tablename__ = 'Persons'
     id = Column(Integer, primary_key=True)
     name = Column(String, unique=False)
     email = Column(String, unique=False)
@@ -24,7 +24,7 @@ class Person(Base):
     phone = Column(String, unique=False)
     relation = Column(String,unique=False)
 
-    def __init__(self, name, email, user_pin, phone, ip, mac, role):
+    def __init__(self, name, email, user_pin, phone, relation, mac, role):
         self.name = name
         self.email = email
         self.user_pin = user_pin
@@ -32,4 +32,4 @@ class Person(Base):
         self.relation = relation
 
     def __repr__(self):
-        return '<residents %r>' %(self.name)
+        return '<Persons %r>' %(self.name)
