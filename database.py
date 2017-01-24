@@ -4,7 +4,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from models import Base, Person
 import datetime
 
-engine = create_engine('sqlite:///homeware.db', convert_unicode=True)
+engine = create_engine('sqlite:///plexians.db', convert_unicode=True)
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
                                          bind=engine))
