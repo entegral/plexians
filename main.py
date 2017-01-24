@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_bootstrap import Bootstrap
 
-import house_controller, database, Person_controller
+import database, Person_controller
 
 database.init_db()
 
