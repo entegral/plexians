@@ -45,7 +45,7 @@ def submit_Person_data():
         email = request.form['email']
         user_pin = request.form['user_pin']
         phone = request.form['phone']
-       relation = request.form['relation']
+        relation = request.form['relation']
         return redirect(url_for('setup_Person'))
     return render_template('setup_Person.html')
 
