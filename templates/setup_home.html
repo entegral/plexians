@@ -1,0 +1,16 @@
+{% extends "dashboard_bootstrap.html" %}
+
+{% block content %}
+
+
+  <div class="col-md-6 panel-primary" style="text-align:center">
+    <div class="panel-heading">
+      <h3 class="panel-title-lg">Welcome to the Home Configuration Page!</h3>
+    </div>
+    <div class="panel-body">
+      <a href="{{  url_for('setup_house')  }}" class="list-group-item"> Configure House</a>
+      <a href="{{  url_for('setup_resident')  }}" class="list-group-item"> Configure Residents</a>
+    </div>
+  </div>
+
+{% endblock %}

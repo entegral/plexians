@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" >
+
+  </head>
+  <title>
+    Casa Del Shrimp!
+  </title>
+
+  <body background="/static/images/bill_and_will.jpg">
+
+    <div class="banner">
+      <div>
+        <a href="{{ url_for('dashboard') }}" id="homelink">La Casa del Shreeeemp!</h1>
+      </div>
+    </div>
+
+    <div class="navmenu">
+      <div class="links">
+        <ul>
+          <li><a href="{{ url_for('animalfeeder') }}">Pet Food Check </a></li>
+          <li><a href="{{  url_for('setup_home')  }}">Configure Household Here! </a></li>
+        </ul>
+      </div>
+    </div>
+
+  </body>
+</html>

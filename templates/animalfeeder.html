@@ -1,0 +1,51 @@
+{% extends "dashboard_bootstrap.html" %}
+
+{% block content %}
+<div class="col-md-5" style="text-align:center">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title-lg">Did you feed the animals in the AM?</h3>
+    </div>
+    <div class="panel-body">
+      <form action="{{ url_for('animals_fedam') }}" method="POST">
+        <button type="submit" value="Confirm Fed">Confirm Fed</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title-lg">Did you feed the animals in the PM?</h3>
+    </div>
+    <div class="panel-body">
+      <form action="{{ url_for('animals_fedpm') }}" method="POST">
+        <button type="submit" value="Confirm Fed">Confirm Fed</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">Today's Feeding Info</h3>
+    </div>
+    <a href="#" class="list-group-item">
+      <h4 class="list-group-item-heading">Date Fed: {{ today.date.strftime('%d-%m-%Y') }}</h4>
+      <p class="list-group-item-text"> AM: {{ today.fed_am }} </p>
+      <p class="list-group-item-text"> PM: {{ today.fed_pm }} </p>
+    </a>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">This Week's Feeding Info</h3>
+    </div>
+    {% for day in week %}
+    <a href="#" class="list-group-item">
+      <h4 class="list-group-item-heading"> Date Fed: {{ day.date.strftime('%d-%m-%Y') }} </h4>
+      <p class="list-group-item-text"> AM: {{ day.fed_am }} </p>
+      <p class="list-group-item-text"> PM: {{ day.fed_pm }} </p>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
