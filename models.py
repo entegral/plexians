@@ -24,7 +24,7 @@ class Person(Base):
     phone = Column(String, unique=False)
     relation = Column(String,unique=False)
 
-    def __init__(self, name, email, user_pin, phone, relation, mac, role):
+    def __init__(self, name, email, user_pin, phone, relation):
         self.name = name
         self.email = email
         self.user_pin = user_pin

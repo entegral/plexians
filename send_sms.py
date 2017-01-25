@@ -15,7 +15,7 @@ def send_sms(phone, note):
 
 phone = "+15416018751"
 note = "test biiiitch!"
-send_sms(phone, note)
+# send_sms(phone, note)
 
 def send_all(people, note):
     note = input("What would you like to sms?")

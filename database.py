@@ -1,4 +1,3 @@
-
 from sqlalchemy import create_engine, desc
 from sqlalchemy.orm import scoped_session, sessionmaker
 from models import Base, Person
