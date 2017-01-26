@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_bootstrap import Bootstrap
 
-import database, person_controller, send_sms
+import database, person_controller, send_sms, models
 
 database.init_db()
 
@@ -41,10 +41,31 @@ def submit_Person_data():
         user_pin = request.form['user_pin']
         phone = request.form['phone']
         relation = request.form['relation']
-        database.addPerson(name, email, user_pin, phone, relation)
+        person = models.Person(name, email, user_pin, phone, relation)
+        database.addPerson(person)
         return redirect(url_for('user_Page'))
     return render_template('user_page.html')
 
+@app.route('/notify_users', methods=['GET'])
+def notify_users():
+    Persons = database.getAllPersons()
+    return render_template('notify_users.html', Persons = Persons)
+
+@app.route('/notify_users/all', methods=['POST'])
+def notify_all_users():
+    if request.method == 'POST':
+        all_users = database.getAllPersons()
+        send_sms.send_all(all_users, request.form['note'])
+        return redirect(url_for('notify_users'))
+    return render_template('notify_users.html')
+
+@app.route('/notify_users/by_name', methods=['POST'])
+def notify_user_by_name():
+    if request.method == 'POST':
+        user = database.getPersonByName(request.form['name'])
+        send_sms.send_sms(user.phone, request.form['note'])
+        return redirect(url_for('notify_users'))
+    return render_template('notify_users.html')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port = 6289)
