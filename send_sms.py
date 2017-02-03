@@ -17,7 +17,7 @@ def send_sms(phone, note):
 
 def send_all(people, note):
 
-        """receives a list of user objects from DB and sends sms to all"""
+    """receives a list of user objects from DB and sends sms to all"""
 
     note = input("What would you like to sms?")
     for individual in people:
@@ -25,7 +25,7 @@ def send_all(people, note):
 
 def sms_reply():
 
-        """Got the following code from the sms reply tutorial on twilio doc site"""
+    """Got the following code from the sms reply tutorial on twilio doc site"""
 
     number = request.form['From']
     message_body = request.form['Body']
