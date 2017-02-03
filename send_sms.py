@@ -24,14 +24,11 @@ def send_all(people, note):
     for individual in people:
         send_sms(individual.phone, note)
 
-def sms_reply():
+def sms_reply(number, message_body):
 
     """Got the following code from the sms reply tutorial on twilio doc site"""
 
-    number = request.form['From']
-    message_body = request.form['Body']
     plexian_user = database.getPersonByPhone(number)
-
     admin_phone = '+15416018751'
     resp = twiml.Response()
     resp.message('Plexian {} says: {}' .format(plexian_user, message_body))

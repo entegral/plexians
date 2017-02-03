@@ -69,7 +69,9 @@ def notify_user_by_name():
 
 @app.route('/sms', methods=['POST'])                                # This route will receive incoming sms POST requests
 def sms():                                                          # from twilio, interpret them, and respond accordingly
-    send_sms.sms_reply()
+    number = request.form['From']
+    message_body = request.form['Body']
+    send_sms.sms_reply(number, message_body)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port = 6289)
