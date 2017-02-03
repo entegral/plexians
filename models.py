@@ -18,18 +18,18 @@ class Person(Base):
 
     __tablename__ = 'Persons'
     id = Column(Integer, primary_key=True)
-    name = Column(String, unique=False)
+    first_name = Column(String, unique=False)
     email = Column(String, unique=False)
-    user_pin = Column(String, unique=False)
+    last_name = Column(String, unique=False)
     phone = Column(String, unique=False)
     relation = Column(String,unique=False)
 
-    def __init__(self, name, email, user_pin, phone, relation):
-        self.name = name
+    def __init__(self, first_name, email, last_name, phone, relation):
+        self.first_name = first_name
         self.email = email
-        self.user_pin = user_pin
+        self.last_name = last_name
         self.phone = phone
         self.relation = relation
 
     def __repr__(self):
-        return '<Persons %r>' %(self.name)
+        return '<Persons %r>' %(self.first_name)

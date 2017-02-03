@@ -37,12 +37,12 @@ def remove_Person():
 @app.route('/user_Page/submit_Person', methods=['GET', 'POST'])
 def submit_Person_data():
     if request.method == 'POST':
-        name = request.form['name']
+        first_name = request.form['first_name']
         email = request.form['email']
-        user_pin = request.form['user_pin']
+        last_name = request.form['last_name']
         phone = request.form['phone']
         relation = request.form['relation']
-        person = models.Person(name, email, user_pin, phone, relation)
+        person = models.Person(first_name, email, last_name, phone, relation)
         database.addPerson(person)
         return redirect(url_for('user_Page'))
     return render_template('user_page.html')
@@ -75,7 +75,7 @@ def sms():                                                          # from twili
     send_sms.sms_reply(number, message_body)
     resp = twiml.Response()
     sender = database.getPersonByPhone(number)
-    resp.message('Hey {}, your issue has been sent to the admin(s), they will send you a notification when the issue has been resolved. Thank you for your patience! '.format(sender.name, message_body))
+    resp.message('Hey {}, your issue has been sent to the admin(s), they will send you a notification when the issue has been resolved. Thank you for your patience! '.format(sender.first_name, message_body))
     return str(resp)
 
 if __name__ == "__main__":

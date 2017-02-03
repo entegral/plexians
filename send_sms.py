@@ -29,6 +29,6 @@ def sms_reply(number, message_body):
     """Got the following code from the sms reply tutorial on twilio doc site"""
 
     plexian_user = database.getPersonByPhone(number)
-    
-    message = 'Plexian %s says: %s' %(plexian_user.name, message_body)
+
+    message = 'Plexian %s says: %s' %(plexian_user.first_name, message_body)
     return send_sms(admin_phone, message)

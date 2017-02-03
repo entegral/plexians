@@ -34,7 +34,7 @@ def getFirstPerson():
     return Person.query.first()
 
 def getPersonByName(name):
-    return Person.query.filter(Person.name == name).one()
+    return Person.query.filter(Person.first_name == name).one()
 
 def getPersonByPhone(phone):
     return Person.query.filter(Person.phone == phone).one()
