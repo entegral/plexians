@@ -7,6 +7,7 @@ from twilio import twiml
 import database
 
 # Find these values at https://twilio.com/user/account
+admin_phone = '+15416018751'
 account_sid = "AC4ef5b1267687ff3f1984829aa9e13f8b"
 auth_token = "afbcc30cede0b005efa5b9c20e365749"
 client = TwilioRestClient(account_sid, auth_token)
@@ -29,7 +30,5 @@ def sms_reply(number, message_body):
     """Got the following code from the sms reply tutorial on twilio doc site"""
 
     plexian_user = database.getPersonByPhone(number)
-    admin_phone = '+15416018751'
-    resp = twiml.Response()
-    resp.message('Plexian {} says: {}' .format(plexian_user, message_body))
-    return str(resp)
+    message = 'Plexian %s says: %s' %(plexian_user, message_body)
+    send_sms(admin_phone, message)
