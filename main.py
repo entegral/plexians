@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_bootstrap import Bootstrap
 
 import database, person_controller, send_sms, models
+from twilio import twiml
 
 database.init_db()
 
@@ -73,7 +74,7 @@ def sms():                                                          # from twili
     message_body = request.form['Body']
     admin_phone = '+15416018751'
     resp = twiml.Response()
-    resp.message('Plexian says: {}'.format(message_body))
+    resp.message('Plexian says: {}' .format(message_body))
     return str(resp)
 
 if __name__ == "__main__":
