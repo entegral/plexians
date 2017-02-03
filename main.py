@@ -71,9 +71,9 @@ def notify_user_by_name():
 def sms():                                                          # from twilio, interpret them, and respond accordingly
     number = request.form['From']
     message_body = request.form['Body']
-
+    admin_phone = '+15416018751'
     resp = twiml.Response()
-    resp.message('Hello {}, you said: {}'.format(number, message_body))
+    resp.message('Plexian says: {}'.format(message_body))
     return str(resp)
 
 if __name__ == "__main__":
