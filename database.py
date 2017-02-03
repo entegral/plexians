@@ -37,7 +37,7 @@ def getPersonByName(name):
     return Person.query.filter(Person.name == name).one()
 
 def getPersonByPhone(phone):
-    return Person.query.filter(Person.phone = phone).one()
+    return Person.query.filter(Person.phone == phone).one()
 
 def deletePerson(name):
     q = getPersonByName(name)
