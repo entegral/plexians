@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_bootstrap import Bootstrap
 
 import database, person_controller, send_sms, models
-from twilio import twiml
 
 database.init_db()
 
@@ -70,12 +69,7 @@ def notify_user_by_name():
 
 @app.route('/sms', methods=['POST'])                                # This route will receive incoming sms POST requests
 def sms():                                                          # from twilio, interpret them, and respond accordingly
-    number = request.form['From']
-    message_body = request.form['Body']
-    admin_phone = '+15416018751'
-    resp = twiml.Response()
-    resp.message('Plexian says: {}' .format(message_body))
-    return str(resp)
+    send_sms.sms_reply()
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port = 6289)
