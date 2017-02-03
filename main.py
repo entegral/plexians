@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_bootstrap import Bootstrap
+from twilio import twiml
 
 import database, person_controller, send_sms, models
 
@@ -72,6 +73,9 @@ def sms():                                                          # from twili
     number = request.form['From']
     message_body = request.form['Body']
     send_sms.sms_reply(number, message_body)
+    resp = twiml.Response()
+    resp.message('Hey {}, your issue has been sent to the admin(s), they will send you a notification when the issue has been resolved. Thank you for your patience! '.format(number, message_body))
+    return str(resp)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port = 6289)
