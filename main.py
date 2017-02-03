@@ -74,7 +74,8 @@ def sms():                                                          # from twili
     message_body = request.form['Body']
     send_sms.sms_reply(number, message_body)
     resp = twiml.Response()
-    resp.message('Hey {}, your issue has been sent to the admin(s), they will send you a notification when the issue has been resolved. Thank you for your patience! '.format(number, message_body))
+    sender = database.getPersonByPhone(number)
+    resp.message('Hey {}, your issue has been sent to the admin(s), they will send you a notification when the issue has been resolved. Thank you for your patience! '.format(sender.name, message_body))
     return str(resp)
 
 if __name__ == "__main__":
