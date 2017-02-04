@@ -23,12 +23,14 @@ def init_db():
 
 # Person Database connections
 
-def addPerson(name):
-    db_session.add(name)
+def addPerson(first_name, email, last_name, phone, relation):
+    db_session.add( Person(first_name, email, last_name, phone, relation) )
     db_session.commit()
 
 def getAllPersons():
-    return Person.query.all()
+    result = Person.query.all()
+    result.sort(key=lambda result: result.first_name)
+    return result
 
 def getFirstPerson():
     return Person.query.first()

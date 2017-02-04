@@ -20,7 +20,6 @@ def send_all(people, note):
 
     """receives a list of user objects from DB and sends sms to all"""
 
-    note = input("What would you like to sms?")
     for individual in people:
         send_sms(individual.phone, note)
 

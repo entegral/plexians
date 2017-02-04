@@ -1,8 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_bootstrap import Bootstrap
 from twilio import twiml
 
-import database, person_controller, send_sms, models
+import database, person_controller, send_sms
 
 database.init_db()
 
@@ -15,10 +15,28 @@ def create_app():
 
   return app
 
-
+app.secret_key = "not so secret"
 # Setup routes - functions and routing related to the setup and configuration of the household
 
 @app.route('/')
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    error = None
+    if request.method == "POST":
+        if request.form["username"] != 'admin' or request.form["password"] !='admin':
+            error = "Username/Password Incorrect"
+        else:
+            session['username'] = request.form['username']
+            flash('Welcome to Plexians')
+            return redirect(url_for('dashboard'))
+    else:
+        return render_template("login.html", error = error)
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('login'))
+
 @app.route('/dashboard')
 def dashboard():
     return render_template("dashboard_bootstrap.html")
@@ -40,10 +58,9 @@ def submit_Person_data():
         first_name = request.form['first_name']
         email = request.form['email']
         last_name = request.form['last_name']
-        phone = request.form['phone']
+        phone = "+1" + request.form['phone']
         relation = request.form['relation']
-        person = models.Person(first_name, email, last_name, phone, relation)
-        database.addPerson(person)
+        database.addPerson(first_name, email, last_name, phone, relation)
         return redirect(url_for('user_Page'))
     return render_template('user_page.html')
 
@@ -63,7 +80,7 @@ def notify_all_users():
 @app.route('/notify_users/by_name', methods=['POST'])
 def notify_user_by_name():
     if request.method == 'POST':
-        user = database.getPersonByName(request.form['name'])
+        user = database.getPersonByName(request.form['first_name'])
         send_sms.send_sms(user.phone, request.form['note'])
         return redirect(url_for('notify_users'))
     return render_template('notify_users.html')
@@ -79,4 +96,4 @@ def sms():                                                          # from twili
     return str(resp)
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port = 6289)
+    app.run(host='0.0.0.0', port = 6289, debug=True)
