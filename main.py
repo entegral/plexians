@@ -15,7 +15,7 @@ def create_app():
 
   return app
 
-app.secret_key = "not so secret"
+app.secret_key = "not so secrets"
 # Setup routes - functions and routing related to the setup and configuration of the household
 
 @app.route('/')
