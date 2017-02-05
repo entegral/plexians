@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Hello Plexian!</title>
+  </head>
+
+
+  <body>
+
+
+<div class="log-form">
+  <h2>Login to your account</h2>
+  <form method="POST" action="{{  url_for('login')  }}">
+    <input type="text" name="username" placeholder="username" />
+    <input type="password" name="password" placeholder="password" />
+    <button type="submit" class="btn">Login</button>
+    <a class="forgot" href="{{url_for('login')}}">Forgot Username?</a>
+  </form>
+</div><!--end log form -->

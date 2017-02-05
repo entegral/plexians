@@ -25,6 +25,7 @@ def login():
     if request.method == "POST":
         if request.form["username"] != 'admin' or request.form["password"] !='admin':
             error = "Username/Password Incorrect"
+            return redirect(url_for('login'))
         else:
             session['username'] = request.form['username']
             flash('Welcome to Plexians')
