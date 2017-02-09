@@ -32,6 +32,13 @@ def getAllPersons():
     result.sort(key=lambda result: result.first_name)
     return result
 
+def addGroup(name, people):
+    db_session.add(Group(name, people))
+    db_session.commit()
+
+def getAllGroups():
+    return Group.query.all()
+
 def getFirstPerson():
     return Person.query.first()
 

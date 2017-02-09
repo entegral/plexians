@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_bootstrap import Bootstrap
 from twilio import twiml
+from flask.ext.login import LoginManager
 
 import database, person_controller, send_sms
 
@@ -15,7 +16,7 @@ def create_app():
 
   return app
 
-app.secret_key = "not so secrets"
+app.secret_key = "58779cb4-484e-4ca6-9f8e-1018da74ebba"
 # Setup routes - functions and routing related to the setup and configuration of the household
 
 @app.route('/')
@@ -25,7 +26,7 @@ def login():
     if request.method == "POST":
         submitted_username = request.form["username"]
         if submitted_username == "Register":
-            return redirect(url_for('user_page'))
+            return redirect(url_for('registration'))
         elif database.getPersonByUsername(submitted_username) == None:
             return render_template("registration.html")
         else:
@@ -39,6 +40,10 @@ def login():
                 return render_template("login.html", error = error)
     else:
         return render_template("login.html", error = error)
+
+@app.route('/registration')
+def registration():
+    return render_template('registration.html')
 
 @app.route('/logout')
 def logout():
