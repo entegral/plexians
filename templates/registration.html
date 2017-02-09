@@ -45,27 +45,6 @@
     </form>
   </div>
 
-  <div class="panel panel-info" style="text-align: center">
-    <div class="panel-heading">
-      <h3 class="panel-title">The following are users already in the database:</h3>
-    </div>
-    {% for each in Persons %}
-    <ul class="list-group">
-      <li class="list-group-item">{{ each.first_name }}</li>
-    </ul>
-    {% endfor %}
-  </div>
-
-  <div class="panel panel-danger" style="text-align: center">
-    <div class="panel-heading">
-      <h3 class="panel-title">Remove a Person</h3>
-    </div>
-    <form action= "{{url_for('remove_Person')}}" method="post">
-      <p class="panel-body">To remove a person from the database, <br> type their first name in the text box and click 'submit':</p>
-      <input type="text" name="removePerson"></input>
-      <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-  </div>
 
 </div>
 

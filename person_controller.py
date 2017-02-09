@@ -6,9 +6,9 @@ import models, database
 
 import os, platform, time
 
-def createNewPerson(name, email, user_pin, phone, relation,):
+def createNewPerson(username, password, first_name, email, last_name, phone, relation):
 	role = "person"
-	newPerson = models.Person(name, email, user_pin, phone, relation)
+	newPerson = models.Person(username, password, first_name, email, last_name, phone, relation)
 	database.addPerson(newPerson)
 
 def setupPersons():

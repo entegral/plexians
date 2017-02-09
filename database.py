@@ -23,8 +23,8 @@ def init_db():
 
 # Person Database connections
 
-def addPerson(first_name, email, last_name, phone, relation):
-    db_session.add( Person(first_name, email, last_name, phone, relation) )
+def addPerson(username, password, first_name, email, last_name, phone, group):
+    db_session.add( Person(username, password, first_name, email, last_name, phone, group) )
     db_session.commit()
 
 def getAllPersons():
@@ -35,11 +35,15 @@ def getAllPersons():
 def getFirstPerson():
     return Person.query.first()
 
+def getPersonByUsername(username):
+    return Person.query.filter(Person.username == username).first()
+
+
 def getPersonByName(name):
-    return Person.query.filter(Person.first_name == name).one()
+    return Person.query.filter(Person.first_name == name).first()
 
 def getPersonByPhone(phone):
-    return Person.query.filter(Person.phone == phone).one()
+    return Person.query.filter(Person.phone == phone).first()
 
 def deletePerson(name):
     q = getPersonByName(name)

@@ -21,15 +21,22 @@ app.secret_key = "not so secrets"
 @app.route('/')
 @app.route('/login', methods=["GET", "POST"])
 def login():
-    error = None
+    error = " "
     if request.method == "POST":
-        if request.form["username"] != 'admin' or request.form["password"] !='admin':
-            error = "Username/Password Incorrect"
-            return redirect(url_for('login'))
+        submitted_username = request.form["username"]
+        if submitted_username == "Register":
+            return redirect(url_for('user_page'))
+        elif database.getPersonByUsername(submitted_username) == None:
+            return render_template("registration.html")
         else:
-            session['username'] = request.form['username']
-            flash('Welcome to Plexians')
-            return redirect(url_for('dashboard'))
+            if database.getPersonByUsername(submitted_username).password == request.form["password"]:
+                session['username'] = request.form['username']
+                flash('Welcome to Plexians')
+                return redirect(url_for('dashboard'))
+
+            else:
+                error = "Username/Password Incorrect"
+                return render_template("login.html", error = error)
     else:
         return render_template("login.html", error = error)
 
@@ -42,27 +49,32 @@ def logout():
 def dashboard():
     return render_template("dashboard_bootstrap.html")
 
-@app.route('/user_Page', methods=['GET'])
-def user_Page():
+@app.route('/user_page', methods=['GET'])
+def user_page():
     Persons = database.getAllPersons()
     return render_template('user_page.html', Persons=Persons)
 
-@app.route('/user_Page/remove_Person', methods=['POST'])
+@app.route('/user_page/remove_Person', methods=['POST'])
 def remove_Person():
     name_to_remove = request.form['removePerson']
     database.deletePerson(name_to_remove)
-    return redirect(url_for('user_Page'))
+    return redirect(url_for('user_page'))
 
-@app.route('/user_Page/submit_Person', methods=['GET', 'POST'])
+@app.route('/user_page/submit_Person', methods=['GET', 'POST'])
 def submit_Person_data():
     if request.method == 'POST':
+        if request.form['password'] != request.form['verify_password']:
+            return render_template('login.html', error = "Passwords do not match!")
+        else:
+            password = request.form['password']
+        username = request.form['username']
         first_name = request.form['first_name']
         email = request.form['email']
         last_name = request.form['last_name']
         phone = "+1" + request.form['phone']
-        relation = request.form['relation']
-        database.addPerson(first_name, email, last_name, phone, relation)
-        return redirect(url_for('user_Page'))
+        group = request.form['group']
+        database.addPerson(username, password, first_name, email, last_name, phone, group)
+        return redirect(url_for('user_page'))
     return render_template('user_page.html')
 
 @app.route('/notify_users', methods=['GET'])

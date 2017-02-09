@@ -11,25 +11,27 @@ Base = declarative_base()
 
 
 class Person(Base):
-    """This is an object that will store information relating to the people
-    living in the household. It stores personal information that
-    enables this app to interact with the people in the household.
-    It also holds information relating to the "role" the Person has. """
+    """This is an object that stores contact information of the people
+    you share your Plex library with. """
 
     __tablename__ = 'Persons'
-    id = Column(Integer, primary_key=True)
-    first_name = Column(String, unique=False)
-    email = Column(String, unique=False)
-    last_name = Column(String, unique=False)
-    phone = Column(String, unique=False)
-    relation = Column(String,unique=False)
+    id = Column(Integer, primary_key = True)
+    username =  Column(String, unique = True)
+    password =  Column(String, unique = False)
+    first_name = Column(String, unique = False)
+    email = Column(String, unique = False)
+    last_name = Column(String, unique = False)
+    phone = Column(String, unique = False)
+    group = Column(String,unique = False)
 
-    def __init__(self, first_name, email, last_name, phone, relation):
+    def __init__(self, username, password, first_name, last_name, email, phone, group):
+        self.username = username
+        self.password = password
         self.first_name = first_name
-        self.email = email
         self.last_name = last_name
+        self.email = email
         self.phone = phone
-        self.relation = relation
+        self.group = group
 
     def __repr__(self):
         return '<Persons %r>' %(self.first_name)
