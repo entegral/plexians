@@ -29,7 +29,7 @@ class Person(Base):
 
     __tablename__ = 'person'
     id = Column(Integer, primary_key = True)
-    username =  Column(String, unique = True, nullable = False)
+    username =  Column(String, unique = False, nullable = False)
     password =  Column(String, unique = False, nullable = False)
     first_name = Column(String, unique = False, nullable = False)
     email = Column(String, unique = False)

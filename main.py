@@ -1,13 +1,19 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_bootstrap import Bootstrap
 from twilio import twiml
-from flask.ext.login import LoginManager
 
-import database, person_controller, send_sms
+import database, person_controller, send_sms, wtf
+from personal_db import db_people, buildDb
 
 database.init_db()
 
+if database.getFirstPerson() == None:
+    buildDb(db_people)
+else:
+    pass
+
 app = Flask(__name__)
+
 
 # bootstrap starter
 def create_app():
@@ -40,6 +46,11 @@ def login():
                 return render_template("login.html", error = error)
     else:
         return render_template("login.html", error = error)
+
+@app.route('/wtforms', methods=['GET', 'POST'])
+def wtforms():
+    form = wtf.LoginForm()
+    return render_template('wtforms_login.html', form = form)
 
 @app.route('/registration')
 def registration():

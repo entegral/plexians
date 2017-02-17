@@ -3,6 +3,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from models import Base, Person
 import datetime
 
+
 engine = create_engine('sqlite:///plexians.db', convert_unicode=True)
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
@@ -20,6 +21,9 @@ def init_db():
     #import RPi.GPIO
 
     ###     the following functions simplify the process of calling database interactions
+
+
+
 
 # Person Database connections
 
