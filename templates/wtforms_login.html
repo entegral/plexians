@@ -1,0 +1,22 @@
+<!doctype html>
+
+{% from "_formhelpers.html" import render_field %}
+
+<html>
+  <head>
+    <title>Hello Plexian!</title>
+  </head>
+
+
+  <body>
+
+
+<div class="log-form">
+  <h2>Login to your account</h2>
+  <form method="POST" action="{{  url_for('wtforms')  }}">
+      {{ form.csrf_token }}
+      {{ render_field(form.username) }}
+      {{ render_field(form.password) }}
+    <input type="submit" value = 'Login'>
+  </form>
+</div><!--end log form -->
