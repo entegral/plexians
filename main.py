@@ -114,14 +114,15 @@ def notify_user_by_name():
         return redirect(url_for('notify_users'))
     return render_template('notify_users.html')
 
-@app.route('/sms', methods=['POST'])                                # This route will receive incoming sms POST requests
+@app.route('/sms', methods=['GET','POST'])                          # This route will receive incoming sms POST requests
 def sms():                                                          # from twilio, interpret them, and respond accordingly
     number = request.form['From']
     message_body = request.form['Body']
-    send_sms.sms_reply(number, message_body)
+    send_sms.sms_admin(number, message_body)
     resp = twiml.Response()
     sender = database.getPersonByPhone(number)
-    resp.message('Hey {}, your issue has been sent to the admin(s), they will send you a notification when the issue has been resolved. Thank you for your patience! '.format(sender.first_name, message_body))
+    # resp.message('Hey {}, your issue has been sent to the admin(s), they will send you a notification when the issue has been resolved. Thank you for your patience! '.format(sender.first_name, message_body))
+
     return str(resp)
 
 if __name__ == "__main__":
