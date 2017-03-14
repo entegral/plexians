@@ -17,7 +17,6 @@ app = Flask(__name__)
 
 # bootstrap starter
 def create_app():
-  app = Flask(__name__)
   Bootstrap(app)
 
   return app
